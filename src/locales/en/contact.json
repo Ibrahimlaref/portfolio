@@ -1,0 +1,17 @@
+{
+  "title": "Let's Work Together",
+  "subtitle": "Have an idea or project? Send a message and let's build it.",
+  "placeholders": {
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "subject": "Project subject",
+    "message": "Tell me about your project..."
+  },
+  "send": "Send Message",
+  "sending": "Sending...",
+  "success": "Message sent successfully!",
+  "error": "Failed to send message. Please try again.",
+  "social": {
+    "title": "Connect With Me"
+  }
+}

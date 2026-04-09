@@ -1,0 +1,25 @@
+{
+  "title": "Experience",
+  "items": {
+    "pfe": {
+      "title": "PFE Academic Platform",
+      "description": "Built scalable Django REST APIs for project management, role-based access, and real-time notifications."
+    },
+    "library": {
+      "title": "Tisemsilt Library Website",
+      "description": "Delivered high-performance Django APIs for catalog search, reservations, member management, and caching."
+    },
+    "ibuy": {
+      "title": "IBuy Retail Platform",
+      "description": "Created a retail e-commerce solution with barcode checkout, inventory analytics, and mobile/web synchronization."
+    },
+    "autopart": {
+      "title": "AutoPartMarket",
+      "description": "Developed auto parts marketplace features for compatibility search, order tracking, and admin inventory control."
+    },
+    "ai": {
+      "title": "AI Code Review Assistant",
+      "description": "Built a GPT-4 powered RAG code review system with vector search and prompt engineering."
+    }
+  }
+}

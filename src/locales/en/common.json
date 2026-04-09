@@ -1,0 +1,16 @@
+{
+  "nav": {
+    "hero": "Hero",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "timeline": "Timeline",
+    "contact": "Contact"
+  },
+  "buttons": {
+    "viewWork": "View My Work",
+    "contactMe": "Contact Me",
+    "github": "GitHub",
+    "details": "Details"
+  }
+}

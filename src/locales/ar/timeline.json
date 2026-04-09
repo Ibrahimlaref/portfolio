@@ -1,0 +1,21 @@
+{
+  "title": "الرحلة",
+  "items": {
+    "developer": {
+      "title": "مطور Full-Stack",
+      "description": "بناء منصات SaaS للإنتاج وتطبيقات الويب القابلة للتوسع"
+    },
+    "student": {
+      "title": "طالب علوم حاسوب",
+      "description": "أنظمة التشغيل، إدارة الذاكرة، برمجة النظام"
+    },
+    "marketplace": {
+      "title": "مشاريع التجارة الإلكترونية والأسواق",
+      "description": "API IBuy، سوق قطع الغيار، منصات تأجير السيارات"
+    },
+    "backend": {
+      "title": "بدء تطوير الخلفية",
+      "description": "Django، APIs REST، PostgreSQL"
+    }
+  }
+}

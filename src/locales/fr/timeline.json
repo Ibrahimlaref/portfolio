@@ -1,0 +1,21 @@
+{
+  "title": "Parcours",
+  "items": {
+    "developer": {
+      "title": "Développeur Full-Stack",
+      "description": "Construction de plateformes SaaS de production et d'applications web évolutives"
+    },
+    "student": {
+      "title": "Étudiant en informatique",
+      "description": "Systèmes d'exploitation, Gestion de la mémoire, Programmation système"
+    },
+    "marketplace": {
+      "title": "Projets E-Commerce & Marketplace",
+      "description": "API IBuy, Marché de pièces auto, Plateformes de location de voitures"
+    },
+    "backend": {
+      "title": "Début du développement backend",
+      "description": "Django, APIs REST, PostgreSQL"
+    }
+  }
+}

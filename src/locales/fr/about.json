@@ -1,0 +1,10 @@
+{
+  "title": "À propos de moi",
+  "bio": "Je suis étudiant en première année du deuxième cycle en sciences informatiques à une université en Algérie, et développeur full-stack avec une expérience pratique dans la construction de plateformes SaaS de production, de backends multi-tenant et de frontends React modernes. Je travaille principalement avec Django, React, Docker, PostgreSQL, Redis et Celery. J'adore architecturer des systèmes propres et évolutifs.",
+  "facts": {
+    "student": "🎓 Étudiant en informatique",
+    "location": "📍 Algérie",
+    "stack": "🛠 Stack",
+    "current": "🔭 Actuellement en train de construire"
+  }
+}

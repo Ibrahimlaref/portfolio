@@ -1,0 +1,17 @@
+{
+  "title": "Travaillons ensemble",
+  "subtitle": "Vous avez un projet en tête ? Discutons-en.",
+  "placeholders": {
+    "name": "Votre nom",
+    "email": "votre.email@exemple.com",
+    "subject": "Sujet",
+    "message": "Votre message..."
+  },
+  "send": "Envoyer le message",
+  "sending": "Envoi en cours...",
+  "success": "Message envoyé avec succès !",
+  "error": "Échec de l'envoi du message. Veuillez réessayer.",
+  "social": {
+    "title": "Connectez-vous avec moi"
+  }
+}

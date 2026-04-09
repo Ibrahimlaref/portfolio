@@ -1,0 +1,16 @@
+{
+  "nav": {
+    "hero": "الرئيسية",
+    "about": "حولي",
+    "skills": "المهارات",
+    "projects": "المشاريع",
+    "timeline": "الرحلة",
+    "contact": "اتصل بي"
+  },
+  "buttons": {
+    "viewWork": "عرض أعمالي",
+    "contactMe": "اتصل بي",
+    "github": "GitHub",
+    "details": "التفاصيل"
+  }
+}
