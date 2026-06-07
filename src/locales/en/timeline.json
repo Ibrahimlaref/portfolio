@@ -1,6 +1,10 @@
 {
   "title": "Experience",
   "items": {
+    "fittech": {
+      "title": "FitTech",
+      "description": "Built a multi-tenant SaaS gym management platform with member CRM, equipment tracking, AI coaching, real-time chat, wallet and billing, and analytics."
+    },
     "pfe": {
       "title": "PFE Academic Platform",
       "description": "Built scalable Django REST APIs for project management, role-based access, and real-time notifications."

@@ -1,6 +1,10 @@
 {
   "title": "Parcours",
   "items": {
+    "fittech": {
+      "title": "FitTech",
+      "description": "Plateforme SaaS multi-tenant pour la gestion de salles de sport, avec CRM membres, suivi des equipements, coaching IA, chat temps reel, wallet et analytics."
+    },
     "developer": {
       "title": "Développeur Full-Stack",
       "description": "Construction de plateformes SaaS de production et d'applications web évolutives"
