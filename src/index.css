@@ -79,4 +79,42 @@
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .project-screenshot-slider {
+    width: 100%;
+    opacity: 0;
+  }
+  .project-screenshot-slider.slide-visible {
+    animation: slideInUp 0.45s ease forwards;
+  }
+  .project-screenshot-strip {
+    display: flex;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    border-radius: 8px;
+    margin-top: 12px;
+    width: 100%;
+    scrollbar-width: none;
+  }
+  .project-screenshot-strip::-webkit-scrollbar {
+    display: none;
+  }
+  .project-screenshot-image {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
 }

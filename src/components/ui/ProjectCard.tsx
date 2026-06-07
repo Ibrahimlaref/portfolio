@@ -1,5 +1,5 @@
 // components/ui/ProjectCard.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,103 @@ import { Project } from '@/pages/Home/data/projects';
 interface ProjectCardProps {
   project: Project;
 }
+
+interface ProjectScreenshotsSliderProps {
+  screenshots: string[];
+  projectName: string;
+}
+
+const ProjectScreenshotsSlider: React.FC<ProjectScreenshotsSliderProps> = ({ screenshots, projectName }) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const scrollToIndex = (index: number) => {
+    sliderRef.current?.scrollTo({
+      left: sliderRef.current.offsetWidth * index,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+
+    if (!wrapper || typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(wrapper);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!screenshots?.length) return;
+
+    const intervalId = window.setInterval(() => {
+      setActiveIndex((currentIndex) => {
+        const nextIndex = (currentIndex + 1) % screenshots.length;
+        sliderRef.current?.scrollTo({
+          left: sliderRef.current.offsetWidth * nextIndex,
+          behavior: 'smooth',
+        });
+        return nextIndex;
+      });
+    }, 3000);
+
+    return () => window.clearInterval(intervalId);
+  }, [screenshots]);
+
+  return (
+    <div
+      ref={wrapperRef}
+      className={`project-screenshot-slider ${isVisible ? 'slide-visible' : ''}`}
+    >
+      <div
+        ref={sliderRef}
+        className="project-screenshot-strip"
+        aria-label={`${projectName} screenshots`}
+      >
+        {screenshots.map((screenshot, index) => (
+          <img
+            key={screenshot}
+            src={screenshot}
+            alt={`${projectName} screenshot ${index + 1}`}
+            loading="lazy"
+            className="project-screenshot-image"
+          />
+        ))}
+      </div>
+      <div className="mt-2 flex justify-center gap-1.5">
+        {screenshots.map((screenshot, index) => (
+          <button
+            key={`${screenshot}-dot`}
+            type="button"
+            aria-label={`Show screenshot ${index + 1}`}
+            className={`h-1.5 w-1.5 rounded-full transition-colors ${
+              activeIndex === index ? 'bg-cyan-400' : 'bg-gray-600'
+            }`}
+            onClick={() => {
+              setActiveIndex(index);
+              scrollToIndex(index);
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const { t } = useTranslation('projects');
@@ -75,13 +172,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         )}
       </div>
 
+      {project.screenshots?.length ? (
+        <ProjectScreenshotsSlider screenshots={project.screenshots} projectName={project.name} />
+      ) : null}
+
       <div className="flex space-x-2">
-        <Button variant="outline" size="sm" asChild>
-          <a href={project.github} target="_blank" rel="noopener noreferrer">
-            <Github className="h-4 w-4 mr-2" />
-            GitHub
-          </a>
-        </Button>
+        {project.github ? (
+          <Button variant="outline" size="sm" asChild>
+            <a href={project.github} target="_blank" rel="noopener noreferrer">
+              <Github className="h-4 w-4 mr-2" />
+              GitHub
+            </a>
+          </Button>
+        ) : null}
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="default" size="sm">
