@@ -112,8 +112,6 @@ const ProjectScreenshotsSlider: React.FC<ProjectScreenshotsSliderProps> = ({ scr
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const { t } = useTranslation('projects');
   const [tiltStyle, setTiltStyle] = useState({});
-  const hasScreenshots = Boolean(project.screenshots?.length);
-  const previewImage = project.screenshots?.[0] || `/screenshots/${project.id}.png`;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (window.innerWidth < 768) return;
@@ -141,22 +139,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       onMouseLeave={handleMouseLeave}
     >
       <div className="relative mb-4">
-        <img
-          src={previewImage}
-          alt={`${project.name} screenshot`}
-          loading="lazy"
-          className={`w-full h-48 rounded-lg ${hasScreenshots ? 'object-contain bg-[#0D1117]' : 'object-cover'}`}
-          onError={(e) => {
-            e.currentTarget.style.display = 'none';
-            const fallback = e.currentTarget.nextElementSibling as HTMLElement;
-            if (fallback) fallback.style.display = 'flex';
-          }}
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg hidden"
-        >
-          {project.name}
-        </div>
+        {project.screenshots?.length ? (
+          <ProjectScreenshotsSlider
+            screenshots={project.screenshots}
+            projectName={project.name}
+            className="project-screenshot-slider-card"
+          />
+        ) : (
+          <>
+            <img
+              src={`/screenshots/${project.id}.png`}
+              alt={`${project.name} screenshot`}
+              loading="lazy"
+              className="w-full h-48 object-cover rounded-lg"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                if (fallback) fallback.style.display = 'flex';
+              }}
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg hidden"
+            >
+              {project.name}
+            </div>
+          </>
+        )}
       </div>
 
       <h3 className="text-xl font-space-grotesk font-bold mb-2 text-white">{project.name}</h3>
@@ -174,10 +182,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </Badge>
         )}
       </div>
-
-      {project.screenshots?.length ? (
-        <ProjectScreenshotsSlider screenshots={project.screenshots} projectName={project.name} />
-      ) : null}
 
       <div className="flex space-x-2">
         {project.github ? (

@@ -120,6 +120,12 @@
     background: rgba(13, 17, 23, 0.72);
     display: block;
   }
+  .project-screenshot-slider-card .project-screenshot-strip {
+    margin-top: 0;
+  }
+  .project-screenshot-slider-card .project-screenshot-image {
+    height: 12rem;
+  }
   .project-screenshot-slider-dialog .project-screenshot-image {
     height: min(58vh, 360px);
   }
