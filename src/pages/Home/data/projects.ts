@@ -130,5 +130,37 @@ export const projects: Project[] = [
       '/assets/fittech/file (1).webp',
       '/assets/fittech/file.webp'
     ]
+  },
+  {
+    id: 'lazuli',
+    name: 'Lazuli',
+    category: 'Marketplace',
+    description: 'Full-stack e-commerce application with a Django REST Framework backend and a React/Vite frontend \u2014 featuring product catalogue, cart, orders, authentication, and an admin dashboard.',
+    tech: ['React', 'Vite', 'TypeScript', 'Django REST', 'PostgreSQL', 'Python'],
+    github: '',
+    highlights: [
+      'Product catalogue browsing and e-commerce workflows',
+      'Shopping cart and order management',
+      'Authentication-backed customer experience',
+      'Admin dashboard for catalogue and operations management',
+      'Django REST Framework API integrated with a React/Vite frontend'
+    ],
+    screenshots: [
+      '/assets/LAZULI/0e387c67-f81e-4f47-a925-4a9fa0e163d2.png',
+      '/assets/LAZULI/10b9abff-70b2-444e-a8f8-94d41b64a0e2.png',
+      '/assets/LAZULI/32622f42-8508-49f4-86cc-e3adf0d957e8.png',
+      '/assets/LAZULI/382119b1-0249-47da-994d-5e1a88ed9f43.png',
+      '/assets/LAZULI/5e902d46-35e8-454b-ad1d-4d55a6fc4080.png',
+      '/assets/LAZULI/9a59bd1a-f629-4354-b0e8-fa8643606a73.png',
+      '/assets/LAZULI/9c54388c-8a30-4ef4-83e9-f094d580dbb8.png',
+      '/assets/LAZULI/ac5730f0-3710-4c89-9ccf-b80c18d3275d.png',
+      '/assets/LAZULI/b1da30c6-dfe1-4da2-b906-c7d3ec1ab63d.png',
+      '/assets/LAZULI/c40d5419-d865-4782-9b51-b5490c506af4.png',
+      '/assets/LAZULI/c4d07495-8237-4c1b-a8fa-3aada2ab6e96.png',
+      '/assets/LAZULI/e2a3a326-c6ef-4a02-a99b-414660e0ebea.png',
+      '/assets/LAZULI/ff0ab534-a70b-43fc-8fa9-19da86eda44d.png',
+      '/assets/LAZULI/file (1).webp',
+      '/assets/LAZULI/file.webp'
+    ]
   }
 ];
