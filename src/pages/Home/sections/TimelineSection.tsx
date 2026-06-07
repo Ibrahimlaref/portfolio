@@ -10,6 +10,12 @@ const TimelineSection = () => {
   const timelineData = [
     {
       year: '2025',
+      title: t('items.lazuli.title'),
+      description: t('items.lazuli.description'),
+      isLeft: true,
+    },
+    {
+      year: '2025',
       title: t('items.fittech.title'),
       description: t('items.fittech.description'),
       isLeft: false,

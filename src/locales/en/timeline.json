@@ -1,6 +1,10 @@
 {
   "title": "Experience",
   "items": {
+    "lazuli": {
+      "title": "Lazuli",
+      "description": "Built a full-stack e-commerce application with a Django REST Framework backend and React/Vite frontend, featuring product catalogue, cart, orders, authentication, and an admin dashboard."
+    },
     "fittech": {
       "title": "FitTech",
       "description": "Built a multi-tenant SaaS gym management platform with member CRM, equipment tracking, AI coaching, real-time chat, wallet and billing, and analytics."

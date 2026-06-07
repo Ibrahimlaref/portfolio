@@ -1,6 +1,10 @@
 {
   "title": "Parcours",
   "items": {
+    "lazuli": {
+      "title": "Lazuli",
+      "description": "Application e-commerce full-stack avec backend Django REST Framework et frontend React/Vite, catalogue produits, panier, commandes, authentification et tableau de bord admin."
+    },
     "fittech": {
       "title": "FitTech",
       "description": "Plateforme SaaS multi-tenant pour la gestion de salles de sport, avec CRM membres, suivi des equipements, coaching IA, chat temps reel, wallet et analytics."
