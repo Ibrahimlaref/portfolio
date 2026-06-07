@@ -14,9 +14,10 @@ interface ProjectCardProps {
 interface ProjectScreenshotsSliderProps {
   screenshots: string[];
   projectName: string;
+  className?: string;
 }
 
-const ProjectScreenshotsSlider: React.FC<ProjectScreenshotsSliderProps> = ({ screenshots, projectName }) => {
+const ProjectScreenshotsSlider: React.FC<ProjectScreenshotsSliderProps> = ({ screenshots, projectName, className = '' }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -71,7 +72,7 @@ const ProjectScreenshotsSlider: React.FC<ProjectScreenshotsSliderProps> = ({ scr
   return (
     <div
       ref={wrapperRef}
-      className={`project-screenshot-slider ${isVisible ? 'slide-visible' : ''}`}
+      className={`project-screenshot-slider ${className} ${isVisible ? 'slide-visible' : ''}`}
     >
       <div
         ref={sliderRef}
@@ -111,6 +112,8 @@ const ProjectScreenshotsSlider: React.FC<ProjectScreenshotsSliderProps> = ({ scr
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const { t } = useTranslation('projects');
   const [tiltStyle, setTiltStyle] = useState({});
+  const hasScreenshots = Boolean(project.screenshots?.length);
+  const previewImage = project.screenshots?.[0] || `/screenshots/${project.id}.png`;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (window.innerWidth < 768) return;
@@ -139,10 +142,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     >
       <div className="relative mb-4">
         <img
-          src={`/screenshots/${project.id}.png`}
+          src={previewImage}
           alt={`${project.name} screenshot`}
           loading="lazy"
-          className="w-full h-48 object-cover rounded-lg"
+          className={`w-full h-48 rounded-lg ${hasScreenshots ? 'object-contain bg-[#0D1117]' : 'object-cover'}`}
           onError={(e) => {
             e.currentTarget.style.display = 'none';
             const fallback = e.currentTarget.nextElementSibling as HTMLElement;
@@ -191,12 +194,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               {t('buttons.details')}
             </Button>
           </DialogTrigger>
-          <DialogContent className="bg-[#0D1117] border-gray-700 max-w-2xl">
+          <DialogContent className="bg-[#0D1117] border-gray-700 max-w-2xl max-h-[85vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="text-white">{project.name}</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               <p className="text-gray-300">{project.description}</p>
+              {project.screenshots?.length ? (
+                <ProjectScreenshotsSlider
+                  screenshots={project.screenshots}
+                  projectName={project.name}
+                  className="project-screenshot-slider-dialog"
+                />
+              ) : null}
               <div>
                 <h4 className="font-semibold text-white mb-2">Highlights</h4>
                 <ul className="list-disc list-inside text-gray-300 space-y-1">
