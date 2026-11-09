@@ -6,40 +6,136 @@ export interface Project {
   description: string;
   tech: string[];
   github: string;
+  live?: string;
   highlights: string[];
-  screenshots?: string[];
+  period?: string;
+  role?: string;
+  coverImage?: ProjectImage;
+  screenshots?: Array<string | ProjectImage>;
+  video?: ProjectVideo;
+}
+
+export interface ProjectImage {
+  webp: string;
+  jpeg: string;
+  alt: string;
+}
+
+export interface ProjectVideo {
+  src: string;
+  kind: 'file' | 'embed';
+  mimeType?: string;
+  poster?: string;
+  link?: string;
+  previewImage?: ProjectImage;
 }
 
 export const projects: Project[] = [
   {
+    id: 'vendex',
+    name: 'Vendex',
+    category: 'SaaS',
+    description: 'Laravel-based SaaS platform for Algerian e-commerce order management, confirmation, and delivery tracking. Active development on a major client project, extending the platform alongside a colleague.',
+    tech: ['Laravel', 'Ecotrack API', 'Carrier APIs', 'Webhooks', 'Polling', 'Google Sheets'],
+    github: 'https://github.com/Ibrahimlaref/vendexdz',
+    live: 'https://www.vendexdz.com/',
+    period: 'juin-août 2026',
+    role: 'Full-stack developer, working with a colleague on a major client project',
+    highlights: [
+      'Integrated Anderson, WorldExpress, and DHD through the Ecotrack API; integrated ZR Express, Noest, Yalidine, and Maystro through their own APIs for order submission and status synchronization',
+      'Built a webhook-first synchronization flow with polling fallback',
+      'Extended Module 11 for commissions, payroll, and invoicing across agents, managers, administrators, and sellers',
+      'Extended Module 9 for worker time tracking',
+      'Added Google Sheets as an intermediary for slow-sync platforms',
+      'Debugged the order status pipeline and fixed swapped article-name and comment fields on carrier submission',
+      'Fixed UI consistency issues and drafted a formal Arabic cahier des charges with a financial annex for the client',
+      'Used Antigravity, OpenCode, Trae, and Claude Code as coding agents; used Claude to draft structured handoff prompts',
+    ],
+    coverImage: {
+      webp: '/images/projects/vendex/vendex-accueil.webp',
+      jpeg: '/images/projects/vendex/vendex-accueil.jpg',
+      alt: 'Page d’accueil de Vendex avec le tableau de confirmation et de suivi des commandes',
+    },
+    screenshots: [
+      {
+        webp: '/images/projects/vendex/vendex-services.webp',
+        jpeg: '/images/projects/vendex/vendex-services.jpg',
+        alt: 'Services Vendex : confirmation rapide, suivi des commandes et statistiques',
+      },
+      {
+        webp: '/images/projects/vendex/vendex-suivi-commandes.webp',
+        jpeg: '/images/projects/vendex/vendex-suivi-commandes.jpg',
+        alt: 'Suivi en temps réel du cycle d’une commande Vendex, identifiant masqué',
+      },
+      {
+        webp: '/images/projects/vendex/vendex-temoignages.webp',
+        jpeg: '/images/projects/vendex/vendex-temoignages.jpg',
+        alt: 'Section des témoignages Vendex, noms des auteurs masqués',
+      },
+      {
+        webp: '/images/projects/vendex/vendex-contact.webp',
+        jpeg: '/images/projects/vendex/vendex-contact.jpg',
+        alt: 'Cartes de contact Vendex avec les coordonnées masquées',
+      },
+    ],
+  },
+  {
     id: 'pfe-platform',
-    name: 'PFE Academic Platform',
+    name: 'Plateforme PFE',
     category: 'Backend',
-    description: 'Scalable Django REST APIs for managing student projects, supervisors, and academic workflows with RBAC and real-time notifications.',
-    tech: ['Django', 'DRF', 'PostgreSQL', 'Redis', 'Docker', 'Django Channels'],
+    description: "Plateforme de gestion académique des projets de fin d’études. Charge de la base de données réduite de 40 %, temps de réponse de l’API réduit de 30 %, plus de 200 utilisateurs.",
+    tech: ['Django', 'Django REST Framework', 'SQLite', 'Django Channels', 'Redis', 'Celery', 'JWT', 'Swagger'],
     github: 'https://github.com/LAREF/PFE-main',
     highlights: [
-      'Role-based access control for students, supervisors, and admins',
-      'Real-time notifications using Django Channels and Redis',
-      'Optimized PostgreSQL queries and caching',
-      'Dockerized deployment for consistent environments',
-      'Project submission, review workflows, and document management'
-    ]
+      'Gestion des projets et des parcours académiques',
+      'Rôles étudiant, enseignant, administrateur et utilisateur externe',
+      'Notifications temps réel via Django Channels et Redis',
+      'API REST avec authentification JWT et documentation Swagger',
+      'Charge de la base de données réduite de 40 % ; temps de réponse de l’API réduit de 30 % ; plus de 200 utilisateurs',
+    ],
+    period: 'mars-juin 2025',
+    role: 'TODO : rôle à confirmer',
   },
   {
     id: 'library-website',
-    name: 'Tisemsilt Library Website',
+    name: "Bibliothèque d'État de Tissemsilt",
     category: 'Backend',
-    description: 'High-performance Django REST APIs for library catalog search, reservations, member management, and institutional publishing.',
+    description: "Développement backend : temps de réponse de l'API réduit de 40 % grâce à JRPC et au cache Redis, avec ajout de la recherche et de la réservation de livres.",
     tech: ['Django', 'DRF', 'PostgreSQL', 'Redis', 'Docker'],
-    github: 'https://github.com/Ibrahimlaref/clothes_store_larazuz',
+    github: '',
     highlights: [
-      'Catalog search with full-text search capabilities',
-      'Book reservation and member account management',
-      'JRPC integration and Redis caching',
-      'Automated backup and recovery mechanisms',
-      'Secure, modular architecture for scalability'
-    ]
+      "Temps de réponse de l'API réduit de 40 % (JRPC, cache Redis)",
+      'Ajout de la recherche et de la réservation de livres',
+    ],
+    coverImage: {
+      webp: '/images/projects/tissemsilt-library/bibliotheque-tissemsilt-accueil.webp',
+      jpeg: '/images/projects/tissemsilt-library/bibliotheque-tissemsilt-accueil.jpg',
+      alt: "Page d'accueil de la Bibliothèque d'État de Tissemsilt",
+    },
+    screenshots: [
+      {
+        webp: '/images/projects/tissemsilt-library/bibliotheque-tissemsilt-recherche-livres.webp',
+        jpeg: '/images/projects/tissemsilt-library/bibliotheque-tissemsilt-recherche-livres.jpg',
+        alt: 'Catalogue de livres avec recherche et filtres de la Bibliothèque d’État de Tissemsilt',
+      },
+      {
+        webp: '/images/projects/tissemsilt-library/bibliotheque-tissemsilt-actualites.webp',
+        jpeg: '/images/projects/tissemsilt-library/bibliotheque-tissemsilt-actualites.jpg',
+        alt: 'Actualités et activités de la Bibliothèque d’État de Tissemsilt',
+      },
+      {
+        webp: '/images/projects/tissemsilt-library/bibliotheque-tissemsilt-espaces.webp',
+        jpeg: '/images/projects/tissemsilt-library/bibliotheque-tissemsilt-espaces.jpg',
+        alt: 'Vue des espaces intérieurs de la Bibliothèque d’État de Tissemsilt',
+      },
+      {
+        webp: '/images/projects/tissemsilt-library/bibliotheque-tissemsilt-fiche-livre.webp',
+        jpeg: '/images/projects/tissemsilt-library/bibliotheque-tissemsilt-fiche-livre.jpg',
+        alt: 'Fiche détaillée d’un livre dans le catalogue de la Bibliothèque d’État de Tissemsilt',
+      },
+    ],
+    period: 'janvier-mars 2025',
+    role: 'Développeur backend',
   },
   {
     id: 'ibuy-retail',
@@ -48,6 +144,16 @@ export const projects: Project[] = [
     description: 'End-to-end retail efficiency platform featuring barcode checkout, inventory analytics, and personalized product recommendations.',
     tech: ['Django', 'DRF', 'React', 'PostgreSQL', 'Docker'],
     github: 'https://github.com/LAREF/IbuyApi-main',
+    video: {
+      kind: 'embed',
+      src: 'https://drive.google.com/file/d/1agA0nzoz4BR3KWJs5xJAi3i2YivDRarR/preview',
+      link: 'https://drive.google.com/file/d/1agA0nzoz4BR3KWJs5xJAi3i2YivDRarR/view?usp=sharing',
+      previewImage: {
+        webp: '/images/projects/ibuy/ibuy-demo-video-poster.webp',
+        jpeg: '/images/projects/ibuy/ibuy-demo-video-poster.jpg',
+        alt: 'Aperçu de la vidéo de démonstration IBuy, avec l’application ouverte sur un smartphone',
+      },
+    },
     highlights: [
       'Mobile barcode scanning reduced checkout time by 60%',
       'Advanced search, filters, and favorites workflows',

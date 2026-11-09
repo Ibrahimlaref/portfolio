@@ -1,2 +1,15 @@
 node_modules/
 dist/
+.env*
+!.env.example
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+coverage/
+*.tsbuildinfo
+.vercel/
+tmp/
+output/pdf/

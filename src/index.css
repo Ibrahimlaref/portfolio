@@ -120,6 +120,12 @@
     background: rgba(13, 17, 23, 0.72);
     display: block;
   }
+  .project-screenshot-frame {
+    display: block;
+    flex: 0 0 100%;
+    width: 100%;
+    scroll-snap-align: start;
+  }
   .project-screenshot-slider-card .project-screenshot-strip {
     margin-top: 0;
   }

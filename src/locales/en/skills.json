@@ -1,4 +1,12 @@
 {
   "title": "Core Competencies",
-  "subtitle": "Technologies I use"
+  "subtitle": "Technologies I use",
+  "categories": {
+    "dataScience": "Data Science & AI",
+    "backend": "Backend",
+    "frontendMobile": "Frontend & Mobile",
+    "databases": "Databases",
+    "devops": "DevOps",
+    "methods": "Methods"
+  }
 }

@@ -1,6 +1,10 @@
 {
   "title": "Parcours",
   "items": {
+    "library": {
+      "title": "Bibliothèque d'État de Tissemsilt",
+      "description": "Temps de réponse de l'API réduit de 40 % avec JRPC et le cache Redis ; ajout de la recherche et de la réservation de livres."
+    },
     "lazuli": {
       "title": "Lazuli",
       "description": "Application e-commerce full-stack avec backend Django REST Framework et frontend React/Vite, catalogue produits, panier, commandes, authentification et tableau de bord admin."

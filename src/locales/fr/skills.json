@@ -1,4 +1,12 @@
 {
-  "title": "Stack technique",
-  "subtitle": "Technologies avec lesquelles je travaille"
+  "title": "Compétences techniques",
+  "subtitle": "Technologies avec lesquelles je travaille",
+  "categories": {
+    "dataScience": "Data science et IA",
+    "backend": "Backend",
+    "frontendMobile": "Frontend et mobile",
+    "databases": "Bases de données",
+    "devops": "DevOps",
+    "methods": "Méthodes"
+  }
 }
