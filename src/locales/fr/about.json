@@ -1,10 +1,11 @@
 {
   "title": "À propos de moi",
-  "bio": "Je suis étudiant en première année du deuxième cycle en sciences informatiques à une université en Algérie, et développeur full-stack avec une expérience pratique dans la construction de plateformes SaaS de production, de backends multi-tenant et de frontends React modernes. Je travaille principalement avec Django, React, Docker, PostgreSQL, Redis et Celery. J'adore architecturer des systèmes propres et évolutifs.",
+  "bio": "Élève-ingénieur en 4e année à l’ESI Sidi Bel Abbès, spécialité intelligence artificielle et science des données. Je développe des systèmes full-stack et des applications d’apprentissage automatique, en présentant les résultats et leurs limites.",
   "facts": {
     "student": "🎓 Étudiant en informatique",
     "location": "📍 Algérie",
     "stack": "🛠 Stack",
-    "current": "🔭 Actuellement en train de construire"
+    "current": "🔭 Actuellement en train de construire",
+    "studentValue": "Élève-ingénieur en 4e année à l’ESI Sidi Bel Abbès, spécialité IA et science des données."
   }
 }

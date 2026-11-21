@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { ExternalLink, Github, Play } from 'lucide-react';
+import { ExternalLink, FileText, Github, Play } from 'lucide-react';
 import { Project, ProjectImage, ProjectVideo } from '@/pages/Home/data/projects';
 
 interface ProjectCardProps {
@@ -219,24 +219,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             className="project-screenshot-slider-card"
           />
         ) : (
-          <>
-            <img
-              src={`/screenshots/${project.id}.png`}
-              alt={`${project.name} screenshot`}
-              loading="lazy"
-              className="w-full h-48 object-cover rounded-lg"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-                const fallback = e.currentTarget.nextElementSibling as HTMLElement;
-                if (fallback) fallback.style.display = 'flex';
-              }}
-            />
-            <div
-              className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg hidden"
-            >
-              {project.name}
-            </div>
-          </>
+          <div
+            className="flex h-48 items-center justify-center rounded-lg border border-white/10 bg-white/5 px-6 text-center text-sm text-gray-400"
+            role="img"
+            aria-label={`${project.name} project preview unavailable`}
+          >
+            Project preview unavailable
+          </div>
         )}
       </div>
 
@@ -316,6 +305,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 />
               ) : null}
               {project.video ? <ProjectDemoVideo video={project.video} projectName={project.name} /> : null}
+              {project.reports?.length ? (
+                <div>
+                  <h4 className="font-semibold text-white mb-2">Reports</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {project.reports.map((report) => (
+                      <Button key={report.href} variant="outline" size="sm" asChild>
+                        <a href={report.href} target="_blank" rel="noopener noreferrer">
+                          <FileText className="h-4 w-4 mr-2" aria-hidden="true" />
+                          {report.label}
+                        </a>
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
               <div>
                 <h4 className="font-semibold text-white mb-2">Highlights</h4>
                 <ul className="list-disc list-inside text-gray-300 space-y-1">

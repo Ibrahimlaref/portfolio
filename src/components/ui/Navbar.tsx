@@ -63,7 +63,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="font-space-grotesk font-bold text-xl gradient-text">
-            Ibrahim LAREF
+            Laref Ibrahim
           </div>
 
           <div className="hidden md:flex space-x-8">
@@ -107,12 +107,12 @@ const Navbar = () => {
                 </a>
               </Button>
               <Button variant="ghost" size="sm" asChild className="text-white hover:text-cyan-400">
-                <a href="https://www.linkedin.com/in/laref-ibrahim" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/laref-ibrahim-4645b4294/" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="h-4 w-4" />
                 </a>
               </Button>
               <Button variant="ghost" size="sm" asChild className="text-white hover:text-cyan-400">
-                <a href="mailto:contact@laref.dev">
+                <a href="mailto:larefibrahim@gmail.com">
                   <Mail className="h-4 w-4" />
                 </a>
               </Button>
@@ -139,17 +139,17 @@ const Navbar = () => {
                   ))}
                   <div className="flex space-x-2 pt-4">
                     <Button variant="ghost" size="sm" asChild>
-                      <a href="https://github.com/LAREF" target="_blank" rel="noopener noreferrer">
+                      <a href="https://github.com/Ibrahimlaref" target="_blank" rel="noopener noreferrer">
                         <Github className="h-4 w-4" />
                       </a>
                     </Button>
                     <Button variant="ghost" size="sm" asChild>
-                      <a href="#" target="_blank" rel="noopener noreferrer">
+                      <a href="https://www.linkedin.com/in/laref-ibrahim-4645b4294/" target="_blank" rel="noopener noreferrer">
                         <Linkedin className="h-4 w-4" />
                       </a>
                     </Button>
                     <Button variant="ghost" size="sm" asChild>
-                      <a href="mailto:contact@laref.dev">
+                      <a href="mailto:larefibrahim@gmail.com">
                         <Mail className="h-4 w-4" />
                       </a>
                     </Button>

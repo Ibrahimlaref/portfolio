@@ -4,16 +4,22 @@ import { useTranslation } from 'react-i18next';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { Button } from '@/components/ui/button';
 import ProjectCard from '@/components/ui/ProjectCard';
-import { projects } from '../data/projects';
+import { projects, type ProjectCategory } from '../data/projects';
 
 const ProjectsSection = () => {
   const { t } = useTranslation('projects');
   const ref = useScrollReveal();
-  const [filter, setFilter] = useState<'All' | 'SaaS' | 'Backend' | 'Marketplace' | 'API'>('All');
+  const [filter, setFilter] = useState<'All' | ProjectCategory>('All');
 
   const filteredProjects = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
-  const categories = ['All', 'SaaS', 'Backend', 'Marketplace', 'API'];
+  const categories: Array<'All' | ProjectCategory> = [
+    'All',
+    'AI & Research',
+    'SaaS',
+    'Backend',
+    'Marketplace',
+  ];
 
   return (
     <div className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -31,7 +37,7 @@ const ProjectsSection = () => {
           <Button
             key={category}
             variant={filter === category ? 'default' : 'outline'}
-            onClick={() => setFilter(category as any)}
+            onClick={() => setFilter(category)}
             className={filter === category ? 'bg-cyan-600 hover:bg-cyan-700' : ''}
           >
             {category}

@@ -1,10 +1,11 @@
 {
   "title": "About Me",
-  "bio": "Ibrahim Laref is a software engineer and full-stack developer specializing in Django REST APIs, modern React frontends, and SaaS architecture. Studying computer science at ESI Sidi Bel Abbes, I build secure, scalable systems for academic platforms, retail operations, and AI tooling.",
+  "bio": "I am a fourth-year engineering student at ESI Sidi Bel Abbes, specializing in AI and data science. I work as a full-stack developer and build machine-learning systems, with measured results and clear limitations.",
   "facts": {
     "student": "🎓 CS Student",
     "location": "📍 Algeria",
     "stack": "🛠 Stack",
-    "current": "🔭 Currently building"
+    "current": "🔭 Currently building",
+    "studentValue": "Fourth-year engineering student at ESI Sidi Bel Abbes, specializing in AI and data science."
   }
 }

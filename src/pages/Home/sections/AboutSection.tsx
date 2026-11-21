@@ -8,7 +8,7 @@ const AboutSection = () => {
   const ref = useScrollReveal();
 
   const facts = [
-    { icon: GraduationCap, label: t('facts.student'), value: 'Software Engineer · Graduated from Higher National School of Computer Science, Sidi Bel Abbes' },
+    { icon: GraduationCap, label: t('facts.student'), value: t('facts.studentValue') },
     { icon: MapPin, label: t('facts.location'), value: 'Relizane, Algeria' },
     { icon: Code, label: t('facts.stack'), value: 'Django · React · PostgreSQL · Docker · Redis' },
     { icon: Lightbulb, label: t('facts.current'), value: 'Building scalable SaaS backends & AI tooling' },
@@ -20,14 +20,16 @@ const AboutSection = () => {
         <div ref={ref} className="reveal">
           <div className="relative">
             <div className="w-64 h-64 mx-auto rounded-full overflow-hidden border-4 border-cyan-400/50 shadow-2xl">
-              <img
-                src="/assets/images/avatar.jpg"
-                alt="LAREF"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = 'https://via.placeholder.com/256x256?text=LAREF';
-                }}
-              />
+              <picture>
+                <source srcSet="/images/profile/laref-ibrahim.webp" type="image/webp" />
+                <img
+                  src="/images/profile/laref-ibrahim.jpg"
+                  alt="Portrait of Laref Ibrahim"
+                  width={600}
+                  height={600}
+                  className="w-full h-full object-cover"
+                />
+              </picture>
             </div>
             <div className="absolute inset-0 rounded-full bg-cyan-400/20 animate-pulse"></div>
           </div>

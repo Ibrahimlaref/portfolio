@@ -2,7 +2,7 @@
 export interface Project {
   id: string;
   name: string;
-  category: 'SaaS' | 'Backend' | 'Marketplace' | 'API';
+  category: ProjectCategory;
   description: string;
   tech: string[];
   github: string;
@@ -13,6 +13,14 @@ export interface Project {
   coverImage?: ProjectImage;
   screenshots?: Array<string | ProjectImage>;
   video?: ProjectVideo;
+  reports?: ProjectReport[];
+}
+
+export type ProjectCategory = 'AI & Research' | 'SaaS' | 'Backend' | 'Marketplace';
+
+export interface ProjectReport {
+  label: string;
+  href: string;
 }
 
 export interface ProjectImage {
@@ -20,6 +28,7 @@ export interface ProjectImage {
   jpeg: string;
   alt: string;
 }
+
 
 export interface ProjectVideo {
   src: string;
@@ -30,7 +39,76 @@ export interface ProjectVideo {
   previewImage?: ProjectImage;
 }
 
+const projectImage = (folder: string, name: string, alt: string): ProjectImage => ({
+  webp: `/images/projects/${folder}/${name}.webp`,
+  jpeg: `/images/projects/${folder}/${name}.jpg`,
+  alt,
+});
+
 export const projects: Project[] = [
+  {
+    id: "qsar",
+    name: "QSAR",
+    category: "AI & Research",
+    description: "Predicting a molecule's toxicity and FDA approval status from its structure, when labels are scarce.",
+    tech: ["Python","scikit-learn","RDKit","FastAPI","pandas","Docker"],
+    github: "https://github.com/Ibrahimlaref/Qsar_prediction-",
+    highlights: ["Problem: Labelling a molecule means running a biological assay. Public datasets hold a few hundred labelled examples against hundreds of thousands of structures available without labels. The question is whether those unlabelled structures can actually be put to use.","Approach: Molecules are described with RDKit descriptors, then self-training draws on a pool of unlabelled molecules from ZINC. The baseline is a random forest trained on the labelled data alone. Model selection uses a composite score, the mean of F1 and ROC-AUC, rather than accuracy alone, because the classes are imbalanced. The selected model is served by a FastAPI endpoint, for single and batch prediction.","Result: On ClinTox, F1 rises from 0.656 to 0.712, a relative gain of 8.5 %. On FDA approval it rises from 0.777 to 0.833, a gain of 7.3 %. Two caveats travel with that result: ROC-AUC does not improve and in fact falls slightly, and the test sets hold 67 and 71 molecules. On Tox21, the only dataset of real size, co-training wins instead, at 2.7 % F1, and self-training does not beat the baseline. The gain is real, but narrow and dataset-dependent."],
+    period: "2025-2026",
+    role: "AI engineer, data pipeline and API",
+    screenshots: [projectImage('qsar','comparaison-methodes-clintox',"Chart comparing F1 and ROC-AUC of the semi-supervised methods against the supervised baseline on ClinTox"), projectImage('qsar','comparaison-methodes-fda',"Chart comparing the same methods on the FDA approval task"), projectImage('qsar','courbes-apprentissage-clintox',"Learning curves on ClinTox, semi-supervised method against supervised baseline")]
+  },
+  {
+    id: "matssl",
+    name: "MatSSL",
+    category: "AI & Research",
+    description: "Five semi-supervised methods evaluated on four properties of inorganic materials, with one thousand labels and up to one hundred thousand unlabelled compositions.",
+    tech: ["Python","scikit-learn","LightGBM","Optuna","pymatgen","matminer","FastAPI","React"],
+    github: "",
+    highlights: ["Problem: Obtaining a property label requires a density functional theory calculation, which costs hours of compute per material. Generative searches such as GNoME, by contrast, propose hundreds of thousands of unlabelled compositions. Can semi-supervised learning exploit them when labels are scarce?","Approach: Five methods — self-training, co-training, label propagation, label spreading and cluster-then-label — are compared against an Optuna-tuned supervised baseline, at a fixed budget of one thousand labels, with unlabelled pools from one thousand to one hundred thousand compositions, across three random seeds. Each composition is described by 142 descriptors. A masked autoencoder trained on 526,352 GNoME compositions additionally learns a compact representation, with a validation R² of 0.912.","Result: The gains are marginal: 0.73 % on stability with co-training, 0.30 % on magnetism with self-training, and 0.01 % on metallicity, which is a tie. When the unlabelled pool comes from GNoME rather than the same dataset, magnetism loses 1.25 %: distribution shift cancels the benefit. The report's conclusion is that moving from 250 to 5,000 labels improves results far more than any of these methods. A second track, using all labels and 28 crystal-structure descriptors, reaches 91.5 % on metallicity, 94.6 % on magnetism and 90.3 % on stability; for band gap, an accuracy of 93.5 % covers a balanced accuracy of 58.9 %, which is the honest figure for a positive class representing 6.7 % of cases."],
+    period: "2026",
+    role: "Experimental design and execution, data pipeline, application and report. Machine-learning mini-project at ESI, carried out in a group of four.",
+    screenshots: [projectImage('matssl','experiences-ssl',"Semi-supervised experiments page: best method, gain obtained, supervised bound and table of trained models"), projectImage('matssl','vue-ensemble',"Application landing page showing dataset volumes and the deployed models"), projectImage('matssl','piste-haute-precision',"High-accuracy track: accuracy by property, confusion matrices and ablation table"), projectImage('matssl','profil-toxicite',"Toxicity profile of a molecule, with one gauge per endpoint and its ROC-AUC")],
+    reports: [{"label":"MatSSL report (PDF)","href":"/reports/matssl-rapport.pdf"}]
+  },
+  {
+    id: 'fittech',
+    name: 'FitTech',
+    category: "AI & Research",
+    description: "Multi-tenant gym management, with a coaching assistant grounded in document retrieval.",
+    tech: ["Django REST","React","TypeScript","Flutter","PostgreSQL","Redis","LangChain"],
+    github: '',
+    highlights: ["Problem: The coaching assistant, backed by a language model, produced invented training instructions that could not be put in front of members as they stood.","Approach: A retrieval index built over 207 documents now grounds the model, together with a Reflexion-style loop that has it revise its answer before returning it. The platform is multi-tenant and distinguishes four roles: brand administrator, moderator, coach and member. Entry check-in uses a QR code, protected against replay by a nonce carried in the JWT. The interface is built on an internal design system, Sandow.","Result: The share of invented answers falls from 34 % to 1.2 %, measured over the 207-document index."],
+    screenshots: [projectImage('fittech','tableau-de-bord',"FitTech dashboard showing revenue, members and activity charts"), projectImage('fittech','pointage-qr',"QR code check-in screen with the member's admission status"), projectImage('fittech','salle-de-coaching',"Discussion room for a coaching group")],
+    period: "2026",
+    role: "Full-stack development and the AI component"
+  },
+  {
+    id: 'ai-review-assistant',
+    name: "AI agents",
+    category: "AI & Research",
+    description: "Tool-using agents that walk a repository, produce an analysis of it and propose a review.",
+    tech: ["Python","LangGraph","CrewAI","LangChain"],
+    github: "",
+    highlights: ["Problem: Reading an unfamiliar repository and reviewing its changes took a disproportionate amount of time for the value returned.","Approach: Agents built with LangGraph, CrewAI and LangChain are orchestrated to traverse the repository, return a structured analysis, then draft a review of the submitted changes.","Result: Manual analysis effort reduced by 70 %, and code-review precision improved by 45 %."],
+    period: "2025-2026",
+    role: "Design and integration",
+    screenshots: []
+  },
+  {
+    id: "daftari",
+    name: "Daftari",
+    category: "SaaS",
+    description: "Replacing the paper credit notebook of Algerian grocery shops, and letting a struggling customer's debt be settled anonymously.",
+    tech: ["React","TypeScript","Dexie / IndexedDB","Tailwind","vite-plugin-pwa","Supabase","Vitest","Playwright"],
+    github: "https://github.com/Ibrahimlaref/Daftari_Mvp",
+    highlights: ["Problem: Neighbourhood shops sell on credit to regular customers and keep the account in a paper notebook. The notebook gets lost or damaged, carry-overs contain errors, the total owed and the oldest debt are hard to establish, and neither shopkeeper nor customer holds a shared proof.","Approach: An installable web application that works offline, in Arabic by default with a switch to French. Recording a debt takes two steps, each customer has a statement, and data is held locally in IndexedDB through Dexie, with optional Supabase synchronisation. The \"Tafrij\" feature lets the shopkeeper publish, without the customer's name, the debt of someone who will not be able to repay; donors pay at the shop or by CCP transfer, and the money never passes through the application, which avoids having to operate a payment service.","Result: Thirty-eight unit tests, an automated end-to-end journey and offline reload are all verified. The interviews, covering eight to ten shops, and the two-week pilot across three to five shops remain to be carried out: there is as yet no field data, and the figures visible in the demonstration are fictional."],
+    period: "2026-2027",
+    role: "Product design, customer discovery and building the MVP. Project for the ESI \"Lean Startups\" module, carried out in a group of four.",
+    screenshots: [projectImage('daftari','tableau-de-bord',"Shopkeeper dashboard in Arabic: total owed, overdue customers and a seven-day chart"), projectImage('daftari','saisie-deux-etapes',"Two-step screen for recording a debt"), projectImage('daftari','tableau-tafrij',"Tafrij board listing debt cases published without names"), projectImage('daftari','releve-client-fr',"A customer statement in the French interface, dark theme")],
+    live: "https://daftari-mvp.vercel.app/#/welcome",
+    reports: [{"label":"Daftari product hypotheses (PDF)","href":"/reports/daftari-document-hypotheses.pdf"},{"label":"Daftari interview guide (PDF)","href":"/reports/daftari-guide-entretien.pdf"}]
+  },
   {
     id: 'vendex',
     name: 'Vendex',
@@ -83,18 +161,14 @@ export const projects: Project[] = [
     id: 'pfe-platform',
     name: 'Plateforme PFE',
     category: 'Backend',
-    description: "Plateforme de gestion académique des projets de fin d’études. Charge de la base de données réduite de 40 %, temps de réponse de l’API réduit de 30 %, plus de 200 utilisateurs.",
-    tech: ['Django', 'Django REST Framework', 'SQLite', 'Django Channels', 'Redis', 'Celery', 'JWT', 'Swagger'],
-    github: 'https://github.com/LAREF/PFE-main',
-    highlights: [
-      'Gestion des projets et des parcours académiques',
-      'Rôles étudiant, enseignant, administrateur et utilisateur externe',
-      'Notifications temps réel via Django Channels et Redis',
-      'API REST avec authentification JWT et documentation Swagger',
-      'Charge de la base de données réduite de 40 % ; temps de réponse de l’API réduit de 30 % ; plus de 200 utilisateurs',
-    ],
+    description: "Tracking final-year projects for students, supervisors and administration.",
+    tech: ["Django","Django REST","Django Channels","Redis","Celery","JWT","Swagger"],
+    github: "",
+    highlights: ["Problem: Final-year project supervision relied on scattered exchanges, with no common view of progress or deliverables.","Approach: Separate journeys per role — student, teacher, administrator and external contributor — rest on real-time notifications through Django Channels and Redis, deferred tasks through Celery, and a REST API authenticated with JWT and documented with Swagger.","Result: Database load reduced by 40 % and API response time reduced by 30 %, for more than 200 users."],
     period: 'mars-juin 2025',
-    role: 'TODO : rôle à confirmer',
+    role: "",
+    coverImage: projectImage('pfe','suivi-projet',"Progress dashboard for a final-year project, from ideation to completion"),
+    screenshots: [projectImage('pfe','espace-projet',"Project workspace: next meeting, deliverables and experience points"), projectImage('pfe','constitution-equipes',"Team formation screen, by project domain"), projectImage('pfe','liste-etudiants',"Student list with specialisation, group and average"), projectImage('pfe','connexion',"Platform sign-in page"), projectImage('pfe','page-accueil',"Public landing page of the platform")]
   },
   {
     id: 'library-website',
@@ -138,12 +212,25 @@ export const projects: Project[] = [
     role: 'Développeur backend',
   },
   {
+    id: 'lazuli',
+    name: "Larazu",
+    category: 'Marketplace',
+    description: "A complete store: catalogue, cart, orders and an administration dashboard.",
+    tech: ["Django REST","React","Vite","TypeScript","PostgreSQL"],
+    github: "https://github.com/Ibrahimlaref/larazu_front_end",
+    highlights: ["Problem: Putting a clothes store online covering the whole journey, from browsing to order tracking, without depending on a third-party platform.","Approach: A Django REST API and a React and Vite interface in TypeScript: catalogue, cart, orders, customer authentication, and an administration dashboard for both the catalogue and sales.","Result: The store covers the full journey, from product page to payment and order tracking."],
+    screenshots: [projectImage('lazuli','boutique',"The Larazu storefront"), projectImage('lazuli','fiche-produit',"A product page, with size selection and add to cart"), projectImage('lazuli','admin-commandes',"Order administration table")],
+    live: "https://larazu-front-end.vercel.app/",
+    period: "2025-2026",
+    role: "Full-stack development"
+  },
+  {
     id: 'ibuy-retail',
     name: 'IBuy Retail Platform',
     category: 'Marketplace',
     description: 'End-to-end retail efficiency platform featuring barcode checkout, inventory analytics, and personalized product recommendations.',
     tech: ['Django', 'DRF', 'React', 'PostgreSQL', 'Docker'],
-    github: 'https://github.com/LAREF/IbuyApi-main',
+    github: "",
     video: {
       kind: 'embed',
       src: 'https://drive.google.com/file/d/1agA0nzoz4BR3KWJs5xJAi3i2YivDRarR/preview',
@@ -168,7 +255,7 @@ export const projects: Project[] = [
     category: 'Marketplace',
     description: 'Auto parts e-commerce platform with compatibility search, order tracking, and admin inventory management.',
     tech: ['Django', 'DRF', 'React', 'PostgreSQL', 'Nginx'],
-    github: 'https://github.com/LAREF/autopartmarket-main',
+    github: "",
     highlights: [
       'Vehicle compatibility matching for make/model/year',
       'Secure payment gateway and order management',
@@ -183,90 +270,12 @@ export const projects: Project[] = [
     category: 'SaaS',
     description: 'Multi-tenant SaaS platform implementing database-per-tenant, schema-per-tenant, and shared schema strategies for licensed enterprise workloads.',
     tech: ['Django', 'PostgreSQL', 'Docker', 'DRF', 'Multi-tenancy'],
-    github: 'https://github.com/LAREF/jira_with_multi_tenant_shered_database_shered_schema',
+    github: "https://github.com/Ibrahimlaref/jira_with_multi_tenant_shered_database_shered_isolatedschemas",
     highlights: [
       'Implemented four multi-tenant architecture strategies',
       'Issue tracking, sprint planning, and role-based permissions',
       'Tenant isolation reference implementation',
       'Customizable workflows for enterprise SaaS'
-    ]
-  },
-  {
-    id: 'ai-review-assistant',
-    name: 'AI Code Review Assistant',
-    category: 'Backend',
-    description: 'GPT-4 powered code review system using RAG architecture, vector search, and prompt engineering for contextual review suggestions.',
-    tech: ['Python', 'FastAPI', 'OpenAI API', 'LangChain', 'Vector DB'],
-    github: 'https://github.com/LAREF/back_end_1CS',
-    highlights: [
-      'Implemented GPT-4 review automation with RAG architecture',
-      'Built a vector knowledge base for code standards',
-      'Created custom prompt pipeline for actionable feedback',
-      'Increased review accuracy by 45%'
-    ]
-  },
-  {
-    id: 'fittech',
-    name: 'FitTech',
-    category: 'SaaS',
-    description: 'Multi-tenant SaaS gym management platform \u2014 covers multi-brand/gym management, member CRM, equipment tracking, AI coaching (RAG + Reflexion Agent), real-time chat, wallet & billing, and RNN-powered analytics. Built as a full-stack product with a focus on scalability and multi-tenancy.',
-    tech: ['React', 'TypeScript', 'Django REST', 'PostgreSQL', 'Redis', 'Docker', 'LangChain', 'RAG'],
-    github: '',
-    highlights: [
-      'Multi-brand and multi-gym tenant management',
-      'Member CRM, equipment tracking, shop, wallet, and billing workflows',
-      'AI coaching architecture using RAG and a Reflexion Agent',
-      'Real-time chat and operational notifications',
-      'RNN-powered analytics for demand, retention, and business insights'
-    ],
-    screenshots: [
-      '/assets/fittech/165560a6-8abe-4790-aa43-b0cfe61fba7f.png',
-      '/assets/fittech/493ae4e3-df7c-440f-a028-a530b17d020c.png',
-      '/assets/fittech/5b324716-346c-4202-8345-3554eafc86f8.png',
-      '/assets/fittech/6b1cc27f-e1ec-47d8-91f0-e469cc897a33.png',
-      '/assets/fittech/6e4fff7c-356e-42b2-8f4d-7cf3a79dd848.png',
-      '/assets/fittech/8842edf0-490e-4a63-9df0-ecbca9346592.png',
-      '/assets/fittech/9ddb292e-fb1a-4e1b-a7f5-0ff4a36797d1.png',
-      '/assets/fittech/b554a970-5367-4abd-952e-ae9de783c649.png',
-      '/assets/fittech/c65b03d8-9ad8-4573-b912-2efc3eec0ab4.png',
-      '/assets/fittech/cc55c0aa-db5e-4e60-a3de-6fd1b940b520.png',
-      '/assets/fittech/db1748ea-e17c-4a8e-9680-dc994556ce8e.png',
-      '/assets/fittech/e95a55f0-6845-44c8-a23d-f616a2926c12.png',
-      '/assets/fittech/f515063a-16ac-4e32-af0b-3b170a3619b8.png',
-      '/assets/fittech/file (1).webp',
-      '/assets/fittech/file.webp'
-    ]
-  },
-  {
-    id: 'lazuli',
-    name: 'Lazuli',
-    category: 'Marketplace',
-    description: 'Full-stack e-commerce application with a Django REST Framework backend and a React/Vite frontend \u2014 featuring product catalogue, cart, orders, authentication, and an admin dashboard.',
-    tech: ['React', 'Vite', 'TypeScript', 'Django REST', 'PostgreSQL', 'Python'],
-    github: '',
-    highlights: [
-      'Product catalogue browsing and e-commerce workflows',
-      'Shopping cart and order management',
-      'Authentication-backed customer experience',
-      'Admin dashboard for catalogue and operations management',
-      'Django REST Framework API integrated with a React/Vite frontend'
-    ],
-    screenshots: [
-      '/assets/LAZULI/0e387c67-f81e-4f47-a925-4a9fa0e163d2.png',
-      '/assets/LAZULI/10b9abff-70b2-444e-a8f8-94d41b64a0e2.png',
-      '/assets/LAZULI/32622f42-8508-49f4-86cc-e3adf0d957e8.png',
-      '/assets/LAZULI/382119b1-0249-47da-994d-5e1a88ed9f43.png',
-      '/assets/LAZULI/5e902d46-35e8-454b-ad1d-4d55a6fc4080.png',
-      '/assets/LAZULI/9a59bd1a-f629-4354-b0e8-fa8643606a73.png',
-      '/assets/LAZULI/9c54388c-8a30-4ef4-83e9-f094d580dbb8.png',
-      '/assets/LAZULI/ac5730f0-3710-4c89-9ccf-b80c18d3275d.png',
-      '/assets/LAZULI/b1da30c6-dfe1-4da2-b906-c7d3ec1ab63d.png',
-      '/assets/LAZULI/c40d5419-d865-4782-9b51-b5490c506af4.png',
-      '/assets/LAZULI/c4d07495-8237-4c1b-a8fa-3aada2ab6e96.png',
-      '/assets/LAZULI/e2a3a326-c6ef-4a02-a99b-414660e0ebea.png',
-      '/assets/LAZULI/ff0ab534-a70b-43fc-8fa9-19da86eda44d.png',
-      '/assets/LAZULI/file (1).webp',
-      '/assets/LAZULI/file.webp'
     ]
   }
 ];

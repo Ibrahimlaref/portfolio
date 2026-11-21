@@ -124,7 +124,7 @@ const ContactSection = () => {
                   <span>GitHub</span>
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/laref-ibrahim"
+                  href="https://www.linkedin.com/in/laref-ibrahim-4645b4294/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 text-gray-300 hover:text-cyan-400 transition-colors"
@@ -133,11 +133,11 @@ const ContactSection = () => {
                   <span>LinkedIn</span>
                 </a>
                 <a
-                  href="mailto:i.laref@esi-sba.dz"
+                  href="mailto:larefibrahim@gmail.com"
                   className="flex items-center space-x-3 text-gray-300 hover:text-cyan-400 transition-colors"
                 >
                   <Mail className="h-5 w-5" />
-                  <span>i.laref@esi-sba.dz</span>
+                  <span>larefibrahim@gmail.com</span>
                 </a>
               </div>
             </div>
